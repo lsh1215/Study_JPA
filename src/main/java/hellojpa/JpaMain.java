@@ -19,10 +19,22 @@ public class JpaMain {
          */
         try {
             Member member = new Member();
-            member.setId(1L);
-            member.setName("Jack");
+            member.setId(100L);
+            member.setName("John");
 
+            System.out.println("=== BEFORE ===");
             em.persist(member);
+            System.out.println("=== AFTER ===");
+
+            Member member2 = em.find(Member.class, 100L);
+            member2.setName("Jane");
+            System.out.println(member2.getName());
+            member2.setName("Jullie");
+            System.out.println(member2.getName());
+            member2.setName("Jane");
+            System.out.println(member2.getName());
+
+
             tx.commit();
         } catch (Exception e){
             // 예외의 경우 transaction을 롤백한다
